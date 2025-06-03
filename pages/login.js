@@ -1,50 +1,50 @@
-import React, { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase-config';
-import { useRouter } from 'next/router';
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../lib/firebase";
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/dashboard'); // Redirige al dashboard
+      alert("Inicio de sesión exitoso");
+      router.push("/dashboard");
     } catch (error) {
-      console.error(error);
+      console.error("Error al iniciar sesión:", error);
       alert(`Error al iniciar sesión: ${error.message}`);
     }
   };
 
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h2>Iniciar sesión</h2>
-      <form onSubmit={handleLogin} style={{ display: 'inline-block', marginTop: '1rem' }}>
-        <div style={{ marginBottom: '1rem' }}>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}>
+      <form onSubmit={handleLogin} style={{ background: "#f5f5f5", padding: "2rem", borderRadius: "10px", boxShadow: "0 0 10px rgba(0,0,0,0.1)" }}>
+        <h2 style={{ textAlign: "center" }}>Iniciar sesión</h2>
+        <div style={{ marginBottom: "1rem" }}>
+          <label>Correo electrónico</label>
           <input
             type="email"
-            placeholder="Correo electrónico"
+            required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ padding: '0.5rem', width: '250px' }}
+            style={{ width: "100%", padding: "0.5rem" }}
           />
         </div>
-        <div style={{ marginBottom: '1rem' }}>
+        <div style={{ marginBottom: "1rem" }}>
+          <label>Contraseña</label>
           <input
             type="password"
-            placeholder="Contraseña"
+            required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ padding: '0.5rem', width: '250px' }}
+            style={{ width: "100%", padding: "0.5rem" }}
           />
         </div>
-        <button type="submit" style={{ padding: '0.5rem 1.5rem' }}>
+        <button type="submit" style={{ width: "100%", padding: "0.75rem", backgroundColor: "#007bff", color: "#fff", border: "none", borderRadius: "5px" }}>
           Ingresar
         </button>
       </form>
