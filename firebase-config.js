@@ -1,14 +1,16 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+// firebase-config.js
 
-const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_DOMINIO.firebaseapp.com",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_BUCKET.appspot.com",
-  messagingSenderId: "TU_SENDER_ID",
-  appId: "TU_APP_ID"
+// Importar desde el SDK de Firebase
+import { initializeApp } from 'firebase/app';
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyARM2n0Z_RMw5N2twPQTpXGKcoS66NxGWM",
+  authDomain: "contratalisto-89564.firebaseapp.com",
+  projectId: "contratalisto-89564",
+  storageBucket: "contratalisto-89564.appspot.com",
+  messagingSenderId: "583988141271",
+  appId: "1:583988141271:web:2a91412bffd1f52aebe492"
 };
 
-const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
+// Inicializar Firebase solo si no está ya inicializado
+export const app = initializeApp(firebaseConfig);

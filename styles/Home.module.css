@@ -1,0 +1,60 @@
+.main {
+  min-height: 100vh;
+  padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #f0f4f8, #ffffff);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.title {
+  font-size: 3rem;
+  color: #222;
+  text-align: center;
+}
+
+.title span {
+  color: #0070f3;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  text-align: center;
+  color: #666;
+}
+
+.buttons {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn,
+.btnSecundario {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn {
+  background-color: #0070f3;
+  color: white;
+}
+
+.btn:hover {
+  background-color: #0059c1;
+}
+
+.btnSecundario {
+  background-color: #eaeaea;
+  color: #333;
+}
+
+.btnSecundario:hover {
+  background-color: #ccc;
+}

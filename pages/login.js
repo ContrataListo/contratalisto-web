@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { auth } from '../firebase-config';
+import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase-config';
 import { useRouter } from 'next/router';
 
 export default function Login() {
@@ -8,21 +8,46 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const router = useRouter();
 
-  const loginUser = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/');
+      router.push('/dashboard'); // Redirige al dashboard
     } catch (error) {
-      alert("Error al iniciar sesión: " + error.message);
+      console.error(error);
+      alert(`Error al iniciar sesión: ${error.message}`);
     }
   };
 
   return (
-    <div>
+    <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h2>Iniciar sesión</h2>
-      <input type="email" placeholder="Correo" onChange={(e) => setEmail(e.target.value)} /><br />
-      <input type="password" placeholder="Contraseña" onChange={(e) => setPassword(e.target.value)} /><br />
-      <button onClick={loginUser}>Ingresar</button>
+      <form onSubmit={handleLogin} style={{ display: 'inline-block', marginTop: '1rem' }}>
+        <div style={{ marginBottom: '1rem' }}>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={{ padding: '0.5rem', width: '250px' }}
+          />
+        </div>
+        <div style={{ marginBottom: '1rem' }}>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={{ padding: '0.5rem', width: '250px' }}
+          />
+        </div>
+        <button type="submit" style={{ padding: '0.5rem 1.5rem' }}>
+          Ingresar
+        </button>
+      </form>
     </div>
   );
 }
