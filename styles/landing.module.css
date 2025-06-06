@@ -2,10 +2,11 @@
 
 .landingContainer {
   font-family: 'Segoe UI', sans-serif;
-  background: #fff;
+  background: #ffffff;
   color: #333;
   padding: 0;
   margin: 0;
+  min-height: 100vh;
 }
 
 .landingHeader {
@@ -14,6 +15,7 @@
   align-items: center;
   padding: 20px 40px;
   border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;
 }
 
 .logo {
@@ -27,29 +29,35 @@
   text-decoration: none;
   color: #333;
   font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navLinks a:hover {
+  color: #2e7d32;
 }
 
 .landingMain {
   text-align: center;
-  padding: 60px 20px;
+  padding: 60px 20px 40px;
 }
 
 .landingMain h1 {
   font-size: 40px;
   margin-bottom: 10px;
+  color: #2e7d32;
 }
 
 .landingMain p {
   font-size: 18px;
-  color: #666;
+  color: #555;
   margin-bottom: 40px;
 }
 
 .searchBar {
   display: flex;
   justify-content: center;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 50px;
 }
 
@@ -58,6 +66,7 @@
   width: 250px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 14px;
 }
 
 .searchBar button {
@@ -67,6 +76,12 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.searchBar button:hover {
+  background-color: #256429;
 }
 
 .stats {
@@ -74,13 +89,14 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
+  margin-bottom: 40px;
 }
 
 .statBox {
-  background: #f8f9fa;
+  background: #f5f5f5;
   padding: 20px 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   text-align: center;
   width: 200px;
 }
@@ -92,7 +108,29 @@
 }
 
 .statBox p {
-  margin: 5px 0 0;
+  margin-top: 5px;
   font-size: 14px;
   color: #555;
+}
+
+.benefits {
+  margin-top: 40px;
+}
+
+.benefits h2 {
+  font-size: 26px;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+
+.benefits ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefits li {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #444;
 }
