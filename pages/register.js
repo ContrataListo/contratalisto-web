@@ -1,83 +1,98 @@
-import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../lib/firebase';
-import { useRouter } from 'next/router';
+// pages/register.js
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../firebase-config"; // ✅ Ruta corregida
 
-export default function RegisterPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const router = useRouter();
+const Register = () => {
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [tipoCuenta, setTipoCuenta] = useState("trabajador");
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      alert('Las contraseñas no coinciden.');
-      return;
-    }
-
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert('Usuario registrado exitosamente');
-      router.push('/login');
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "Usuarios", user.uid), {
+        nombre,
+        email,
+        tipoCuenta,
+        uid: user.uid,
+      });
+
+      alert("Registro exitoso");
     } catch (error) {
-      console.error(error);
-      alert(`Error al registrar: ${error.message}`);
+      console.error("Error registrando usuario:", error);
+      alert("Error: " + error.message);
     }
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5rem' }}>
-      <div style={{ width: '100%', maxWidth: '400px', padding: '2rem', border: '1px solid #ccc', borderRadius: '8px' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Registrarse</h2>
-        <form onSubmit={handleRegister}>
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Nombre completo</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              style={{ width: '100%', padding: '0.5rem', borderRadius: '4px' }}
-            />
-          </div>
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Correo electrónico</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={{ width: '100%', padding: '0.5rem', borderRadius: '4px' }}
-            />
-          </div>
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Contraseña</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{ width: '100%', padding: '0.5rem', borderRadius: '4px' }}
-            />
-          </div>
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Confirmar contraseña</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              style={{ width: '100%', padding: '0.5rem', borderRadius: '4px' }}
-            />
-          </div>
-          <button type="submit" style={{ width: '100%', padding: '0.75rem', backgroundColor: '#0070f3', color: '#fff', border: 'none', borderRadius: '4px' }}>
-            Registrarse
-          </button>
-        </form>
-      </div>
+    <div style={{ padding: "40px", fontFamily: "Segoe UI, sans-serif" }}>
+      <h1>Crear cuenta</h1>
+      <form onSubmit={handleRegister} style={{ maxWidth: "400px", margin: "0 auto" }}>
+        <div>
+          <label>Nombre completo:</label>
+          <input
+            type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            required
+            style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>Correo electrónico:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>Contraseña:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={{ width: "100%", padding: "10px", marginBottom: "10px" }}
+          />
+        </div>
+        <div>
+          <label>Tipo de cuenta:</label>
+          <select
+            value={tipoCuenta}
+            onChange={(e) => setTipoCuenta(e.target.value)}
+            style={{ width: "100%", padding: "10px", marginBottom: "20px" }}
+          >
+            <option value="trabajador">Trabajador</option>
+            <option value="empresa">Empresa</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          style={{
+            backgroundColor: "#2e7d32",
+            color: "#fff",
+            padding: "12px 20px",
+            border: "none",
+            borderRadius: "5px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          Registrarse
+        </button>
+      </form>
     </div>
   );
-}
+};
+
+export default Register;
