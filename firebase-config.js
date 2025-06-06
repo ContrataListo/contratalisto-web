@@ -1,16 +1,20 @@
 // firebase-config.js
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-// Importar desde el SDK de Firebase
-import { initializeApp } from 'firebase/app';
-
-export const firebaseConfig = {
-  apiKey: "AIzaSyARM2n0Z_RMw5N2twPQTpXGKcoS66NxGWM",
+const firebaseConfig = {
+  apiKey: "AIzaSyBIXXDc7eq1amvKeI6mD-glR72HWyTijm0",
   authDomain: "contratalisto-89564.firebaseapp.com",
   projectId: "contratalisto-89564",
   storageBucket: "contratalisto-89564.appspot.com",
-  messagingSenderId: "583988141271",
-  appId: "1:583988141271:web:2a91412bffd1f52aebe492"
+  messagingSenderId: "295286192163",
+  appId: "1:295286192163:web:2f2b5ba9e7d7ec0e5d92f7"
 };
 
-// Inicializar Firebase solo si no está ya inicializado
-export const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export { auth, db };

@@ -1,0 +1,98 @@
+/* styles/landing.module.css */
+
+.landingContainer {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+.landingHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  border-bottom: 1px solid #eee;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.navLinks a {
+  margin-left: 30px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.landingMain {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.landingMain h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.landingMain p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+
+.searchBar input {
+  padding: 12px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.searchBar button {
+  padding: 12px 25px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.statBox {
+  background: #f8f9fa;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  text-align: center;
+  width: 200px;
+}
+
+.statBox h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #2e7d32;
+}
+
+.statBox p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
